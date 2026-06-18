@@ -1,6 +1,7 @@
 {
   "key.category.yutas-client-utilities.general": "Yuta's Client Utilities",
   "key.yutas-client-utilities.copy_coordinates": "Copy Coordinates",
+  "key.yutas-client-utilities.open_radial_menu_prefix": "Shared Radial Menu Key",
   "key.yutas-client-utilities.open_coordinate_menu": "Open Coordinate Menu",
   "message.yutas-client-utilities.coordinate-copy.success": "Copied coordinates: %s",
   "message.yutas-client-utilities.coordinate-copy.unavailable": "Corresponding coordinates are only available in the Overworld and Nether",

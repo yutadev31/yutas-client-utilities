@@ -1,10 +1,9 @@
 package com.yutadev31.yutasClientUtilities.client;
 
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.gui.Click;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.client.input.KeyInput;
+import net.minecraft.client.option.KeyBinding;
 import net.minecraft.text.Text;
 import net.minecraft.util.math.MathHelper;
 
@@ -18,11 +17,12 @@ final class CoordinateRadialMenuScreen extends Screen {
     private static final int NORMAL_COLOR = 0xAA1F1F1F;
     private static final int HIGHLIGHT_COLOR = 0xE070C070;
     private static final int PRIMARY_TEXT_COLOR = 0xFFFFFFFF;
-    private static final int SECONDARY_TEXT_COLOR = 0xFFD0D0D0;
-    private boolean seenInitialPress;
+    private final KeyBinding selectorKey;
+    private boolean comboSeenPressed;
 
-    CoordinateRadialMenuScreen() {
+    CoordinateRadialMenuScreen(KeyBinding selectorKey) {
         super(Text.translatable("radial.yutas-client-utilities.coordinate-copy.title"));
+        this.selectorKey = selectorKey;
     }
 
     @Override
@@ -36,6 +36,15 @@ final class CoordinateRadialMenuScreen extends Screen {
             close();
             return;
         }
+
+        if (CoordinateCopyFeature.isMenuComboPressed(client, selectorKey)) {
+            comboSeenPressed = true;
+            return;
+        }
+
+        if (comboSeenPressed) {
+            finishSelection();
+        }
     }
 
     @Override
@@ -46,26 +55,6 @@ final class CoordinateRadialMenuScreen extends Screen {
     @Override
     public boolean shouldCloseOnEsc() {
         return true;
-    }
-
-    @Override
-    public boolean keyReleased(KeyInput input) {
-        if (CoordinateCopyFeature.matchesMenuKey(input.key(), input.scancode(), input.modifiers())) {
-            seenInitialPress = true;
-            finishSelection();
-            return true;
-        }
-        return super.keyReleased(input);
-    }
-
-    @Override
-    public boolean mouseReleased(Click click) {
-        if (CoordinateCopyFeature.matchesMenuMouse(click.x(), click.y(), click.button(), click.modifiers())) {
-            seenInitialPress = true;
-            finishSelection();
-            return true;
-        }
-        return super.mouseReleased(click);
     }
 
     @Override
@@ -160,7 +149,7 @@ final class CoordinateRadialMenuScreen extends Screen {
     }
 
     private void finishSelection() {
-        if (!seenInitialPress || this.client == null) {
+        if (!comboSeenPressed || this.client == null) {
             close();
             return;
         }

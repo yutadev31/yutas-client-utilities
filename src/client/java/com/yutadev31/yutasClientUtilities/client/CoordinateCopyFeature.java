@@ -1,17 +1,17 @@
 package com.yutadev31.yutasClientUtilities.client;
 
 import java.util.Locale;
+import java.util.function.Function;
 
 import org.lwjgl.glfw.GLFW;
 
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.gui.Click;
-import net.minecraft.client.input.KeyInput;
-import net.minecraft.client.input.MouseInput;
+import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.option.KeyBinding;
 import net.minecraft.client.util.InputUtil;
+import net.minecraft.client.util.InputUtil.Key;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
@@ -24,11 +24,22 @@ final class CoordinateCopyFeature {
             InputUtil.Type.KEYSYM,
             GLFW.GLFW_KEY_UNKNOWN,
             KEY_CATEGORY));
+    private static final KeyBinding OPEN_RADIAL_MENU_PREFIX_KEY = KeyBindingHelper.registerKeyBinding(new KeyBinding(
+            "key.yutas-client-utilities.open_radial_menu_prefix",
+            InputUtil.Type.KEYSYM,
+            GLFW.GLFW_KEY_UNKNOWN,
+            KEY_CATEGORY));
     private static final KeyBinding OPEN_COORDINATE_MENU_KEY = KeyBindingHelper.registerKeyBinding(new KeyBinding(
             "key.yutas-client-utilities.open_coordinate_menu",
             InputUtil.Type.KEYSYM,
             GLFW.GLFW_KEY_UNKNOWN,
             KEY_CATEGORY));
+    private static final RadialMenuBinding[] RADIAL_MENU_BINDINGS = {
+            new RadialMenuBinding(
+                    OPEN_COORDINATE_MENU_KEY,
+                    client -> new CoordinateRadialMenuScreen(OPEN_COORDINATE_MENU_KEY))
+    };
+    private static RadialMenuBinding previouslyPressedMenu;
 
     private CoordinateCopyFeature() {
     }
@@ -39,18 +50,12 @@ final class CoordinateCopyFeature {
                 copyCoordinates(client, CoordinateCopyAction.CUSTOM);
             }
 
-            while (OPEN_COORDINATE_MENU_KEY.wasPressed()) {
-                openRadialMenu(client);
+            RadialMenuBinding activeMenu = getActiveRadialMenu(client);
+            if (activeMenu != null && activeMenu != previouslyPressedMenu) {
+                openRadialMenu(client, activeMenu);
             }
+            previouslyPressedMenu = activeMenu;
         });
-    }
-
-    static boolean matchesMenuKey(int keyCode, int scanCode, int modifiers) {
-        return OPEN_COORDINATE_MENU_KEY.matchesKey(new KeyInput(keyCode, scanCode, modifiers));
-    }
-
-    static boolean matchesMenuMouse(double mouseX, double mouseY, int button, int modifiers) {
-        return OPEN_COORDINATE_MENU_KEY.matchesMouse(new Click(mouseX, mouseY, new MouseInput(button, modifiers)));
     }
 
     static void copyCoordinates(MinecraftClient client, CoordinateCopyAction action) {
@@ -98,11 +103,52 @@ final class CoordinateCopyFeature {
         return String.format(Locale.ROOT, "%.3f", value);
     }
 
-    private static void openRadialMenu(MinecraftClient client) {
+    static boolean isMenuComboPressed(MinecraftClient client, KeyBinding selectorKey) {
+        if (client == null) {
+            return false;
+        }
+
+        Key prefixKey = InputUtil.fromTranslationKey(OPEN_RADIAL_MENU_PREFIX_KEY.getBoundKeyTranslationKey());
+        Key menuKey = InputUtil.fromTranslationKey(selectorKey.getBoundKeyTranslationKey());
+        if (prefixKey == InputUtil.UNKNOWN_KEY || menuKey == InputUtil.UNKNOWN_KEY) {
+            return false;
+        }
+
+        long handle = client.getWindow().getHandle();
+        return isBindingPressed(client, handle, prefixKey) && isBindingPressed(client, handle, menuKey);
+    }
+
+    private static void openRadialMenu(MinecraftClient client, RadialMenuBinding menuBinding) {
         if (client.player == null || client.currentScreen != null) {
             return;
         }
 
-        client.setScreen(new CoordinateRadialMenuScreen());
+        client.setScreen(menuBinding.createScreen(client));
+    }
+
+    private static RadialMenuBinding getActiveRadialMenu(MinecraftClient client) {
+        for (RadialMenuBinding menuBinding : RADIAL_MENU_BINDINGS) {
+            if (isMenuComboPressed(client, menuBinding.selectorKey())) {
+                return menuBinding;
+            }
+        }
+        return null;
+    }
+
+    private static boolean isBindingPressed(MinecraftClient client, long handle, Key boundKey) {
+        if (boundKey == InputUtil.UNKNOWN_KEY) {
+            return false;
+        }
+
+        return switch (boundKey.getCategory()) {
+            case KEYSYM, SCANCODE -> InputUtil.isKeyPressed(client.getWindow(), boundKey.getCode());
+            case MOUSE -> GLFW.glfwGetMouseButton(handle, boundKey.getCode()) == GLFW.GLFW_PRESS;
+        };
+    }
+
+    private record RadialMenuBinding(KeyBinding selectorKey, Function<MinecraftClient, Screen> screenFactory) {
+        private Screen createScreen(MinecraftClient client) {
+            return screenFactory.apply(client);
+        }
     }
 }

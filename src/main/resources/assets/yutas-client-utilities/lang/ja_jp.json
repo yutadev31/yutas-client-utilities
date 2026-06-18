@@ -1,6 +1,7 @@
 {
   "key.category.yutas-client-utilities.general": "Yuta's Client Utilities",
   "key.yutas-client-utilities.copy_coordinates": "座標をコピー",
+  "key.yutas-client-utilities.open_radial_menu_prefix": "円形メニュー共通キー",
   "key.yutas-client-utilities.open_coordinate_menu": "座標メニューを開く",
   "message.yutas-client-utilities.coordinate-copy.success": "座標をコピーしました: %s",
   "message.yutas-client-utilities.coordinate-copy.unavailable": "この次元では対応座標を計算できません",
