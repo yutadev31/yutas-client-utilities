@@ -31,9 +31,7 @@ final class YutasClientUtilitiesConfigScreen {
                 .setSaveConsumer(config::setCoordinateCopyFormat)
                 .build());
 
-        builder.setSavingRunnable(() -> {
-            YutasClientUtilitiesConfig.save();
-        });
+        builder.setSavingRunnable(YutasClientUtilitiesConfig::save);
 
         return builder.build();
     }

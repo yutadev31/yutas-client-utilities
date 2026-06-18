@@ -18,6 +18,7 @@ public final class YutasClientUtilitiesConfig {
     private static YutasClientUtilitiesConfig instance;
 
     private String coordinateCopyFormat = "{x}, {y}, {z}";
+
     private YutasClientUtilitiesConfig() {
     }
 

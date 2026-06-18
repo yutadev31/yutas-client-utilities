@@ -16,6 +16,9 @@
     "client": [
       "com.yutadev31.yutasClientUtilities.client.YutasClientUtilitiesClient"
     ],
+    "modmenu": [
+      "com.yutadev31.yutasClientUtilities.client.YutasClientUtilitiesModMenuIntegration"
+    ],
     "main": [
       "com.yutadev31.yutasClientUtilities.YutasClientUtilities"
     ]
