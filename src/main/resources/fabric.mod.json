@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "id": "yutas-client-utilities",
+  "version": "${version}",
+  "name": "Yuta's Client Utilities",
+  "description": "",
+  "authors": [],
+  "contact": {},
+  "license": "MIT",
+  "icon": "assets/yutas-client-utilities/icon.png",
+  "environment": "client",
+  "entrypoints": {
+    "fabric-datagen": [
+      "com.yutadev31.yutasClientUtilities.client.YutasClientUtilitiesDataGenerator"
+    ],
+    "client": [
+      "com.yutadev31.yutasClientUtilities.client.YutasClientUtilitiesClient"
+    ],
+    "main": [
+      "com.yutadev31.yutasClientUtilities.YutasClientUtilities"
+    ]
+  },
+  "mixins": [
+    "yutas-client-utilities.mixins.json",
+    {
+      "config": "yutas-client-utilities.client.mixins.json",
+      "environment": "client"
+    }
+  ],
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "fabric-api": "*",
+    "minecraft": "${minecraft_version}"
+  }
+}
