@@ -6,5 +6,6 @@ public class YutasClientUtilitiesClient implements ClientModInitializer {
 
     @Override
     public void onInitializeClient() {
+        CoordinateCopyFeature.initialize();
     }
 }
