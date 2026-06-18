@@ -24,9 +24,10 @@ final class YutasClientUtilitiesConfigScreen {
                 .startStrField(Text.literal("座標コピーのフォーマット"), config.getCoordinateCopyFormat())
                 .setDefaultValue("{x} {y} {z}")
                 .setTooltip(
-                        Text.literal("座標コピーボタンで使う文字列です。"),
+                        Text.literal("円形メニューの「カスタム」で使う文字列です。"),
                         Text.literal("使用可能: {x} {y} {z} は整数座標、{fx} {fy} {fz} は小数座標です。"),
-                        Text.literal("キー割り当ては操作設定から「座標をコピー」を設定してください。"))
+                        Text.literal("キー割り当ては操作設定から「座標をコピー」と「座標メニューを開く」を設定してください。"),
+                        Text.literal("メニューキーを押すと開き、マウス移動で選択、キーを離すとコピーします。"))
                 .setSaveConsumer(config::setCoordinateCopyFormat)
                 .build());
 

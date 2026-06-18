@@ -1,3 +1,15 @@
 {
+  "key.category.yutas-client-utilities.general": "Yuta's Client Utilities",
+  "key.yutas-client-utilities.copy_coordinates": "座標をコピー",
+  "key.yutas-client-utilities.open_coordinate_menu": "座標メニューを開く",
+  "message.yutas-client-utilities.coordinate-copy.success": "座標をコピーしました: %s",
+  "message.yutas-client-utilities.coordinate-copy.unavailable": "この次元では対応座標を計算できません",
+  "radial.yutas-client-utilities.coordinate-copy.title": "座標をコピー",
+  "radial.yutas-client-utilities.coordinate-copy.custom": "カスタム",
+  "radial.yutas-client-utilities.coordinate-copy.block": "整数",
+  "radial.yutas-client-utilities.coordinate-copy.precise": "小数",
+  "radial.yutas-client-utilities.coordinate-copy.xz": "XZ",
+  "radial.yutas-client-utilities.coordinate-copy.corresponding": "対応座標",
+  "radial.yutas-client-utilities.coordinate-copy.chunk": "チャンク",
   "title.yutas-client-utilities.config": "Yuta's Client Utilities 設定"
 }

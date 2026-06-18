@@ -1,4 +1,15 @@
 {
   "key.category.yutas-client-utilities.general": "Yuta's Client Utilities",
+  "key.yutas-client-utilities.copy_coordinates": "Copy Coordinates",
+  "key.yutas-client-utilities.open_coordinate_menu": "Open Coordinate Menu",
+  "message.yutas-client-utilities.coordinate-copy.success": "Copied coordinates: %s",
+  "message.yutas-client-utilities.coordinate-copy.unavailable": "Corresponding coordinates are only available in the Overworld and Nether",
+  "radial.yutas-client-utilities.coordinate-copy.title": "Copy Coordinates",
+  "radial.yutas-client-utilities.coordinate-copy.custom": "Custom",
+  "radial.yutas-client-utilities.coordinate-copy.block": "Block",
+  "radial.yutas-client-utilities.coordinate-copy.precise": "Precise",
+  "radial.yutas-client-utilities.coordinate-copy.xz": "XZ",
+  "radial.yutas-client-utilities.coordinate-copy.corresponding": "Linked",
+  "radial.yutas-client-utilities.coordinate-copy.chunk": "Chunk",
   "title.yutas-client-utilities.config": "Yuta's Client Utilities Config"
 }
