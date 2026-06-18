@@ -11,13 +11,13 @@
   "environment": "client",
   "entrypoints": {
     "fabric-datagen": [
-      "com.yutadev31.yutasClientUtilities.client.YutasClientUtilitiesDataGenerator"
+      "com.yutadev31.yutasClientUtilities.client.datagen.YutasClientUtilitiesDataGenerator"
     ],
     "client": [
       "com.yutadev31.yutasClientUtilities.client.YutasClientUtilitiesClient"
     ],
     "modmenu": [
-      "com.yutadev31.yutasClientUtilities.client.YutasClientUtilitiesModMenuIntegration"
+      "com.yutadev31.yutasClientUtilities.client.integration.YutasClientUtilitiesModMenuIntegration"
     ],
     "main": [
       "com.yutadev31.yutasClientUtilities.YutasClientUtilities"

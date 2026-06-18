@@ -1,4 +1,4 @@
-package com.yutadev31.yutasClientUtilities.client;
+package com.yutadev31.yutasClientUtilities.client.config;
 
 import me.shedaniel.clothconfig2.api.ConfigBuilder;
 import me.shedaniel.clothconfig2.api.ConfigCategory;
@@ -6,11 +6,11 @@ import me.shedaniel.clothconfig2.api.ConfigEntryBuilder;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.text.Text;
 
-final class YutasClientUtilitiesConfigScreen {
+public final class YutasClientUtilitiesConfigScreen {
     private YutasClientUtilitiesConfigScreen() {
     }
 
-    static Screen create(Screen parent) {
+    public static Screen create(Screen parent) {
         YutasClientUtilitiesConfig config = YutasClientUtilitiesConfig.get();
 
         ConfigBuilder builder = ConfigBuilder.create()

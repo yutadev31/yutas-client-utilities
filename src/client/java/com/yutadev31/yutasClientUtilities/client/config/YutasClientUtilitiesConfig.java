@@ -1,4 +1,4 @@
-package com.yutadev31.yutasClientUtilities.client;
+package com.yutadev31.yutasClientUtilities.client.config;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;

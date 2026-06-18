@@ -1,8 +1,10 @@
-package com.yutadev31.yutasClientUtilities.client;
+package com.yutadev31.yutasClientUtilities.client.feature.coordinate;
 
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.text.Text;
 import net.minecraft.world.World;
+
+import com.yutadev31.yutasClientUtilities.client.config.YutasClientUtilitiesConfig;
 
 enum CoordinateCopyAction {
     CUSTOM("radial.yutas-client-utilities.coordinate-copy.custom") {

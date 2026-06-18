@@ -1,9 +1,11 @@
-package com.yutadev31.yutasClientUtilities.client;
+package com.yutadev31.yutasClientUtilities.client.feature.coordinate;
 
 import java.util.Locale;
 import java.util.function.Function;
 
 import org.lwjgl.glfw.GLFW;
+
+import com.yutadev31.yutasClientUtilities.client.config.YutasClientUtilitiesConfig;
 
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
@@ -16,7 +18,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 
-final class CoordinateCopyFeature {
+public final class CoordinateCopyFeature {
     private static final String DEFAULT_FORMAT = "{x} {y} {z}";
     private static final KeyBinding.Category KEY_CATEGORY = KeyBinding.Category.create(Identifier.of("yutas-client-utilities", "general"));
     private static final KeyBinding COPY_COORDINATES_KEY = KeyBindingHelper.registerKeyBinding(new KeyBinding(
@@ -44,7 +46,7 @@ final class CoordinateCopyFeature {
     private CoordinateCopyFeature() {
     }
 
-    static void initialize() {
+    public static void initialize() {
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
             while (COPY_COORDINATES_KEY.wasPressed()) {
                 copyCoordinates(client, CoordinateCopyAction.CUSTOM);

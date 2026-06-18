@@ -1,4 +1,6 @@
-package com.yutadev31.yutasClientUtilities.client;
+package com.yutadev31.yutasClientUtilities.client.integration;
+
+import com.yutadev31.yutasClientUtilities.client.config.YutasClientUtilitiesConfigScreen;
 
 import com.terraformersmc.modmenu.api.ConfigScreenFactory;
 import com.terraformersmc.modmenu.api.ModMenuApi;
